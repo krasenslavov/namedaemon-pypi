@@ -78,7 +78,7 @@ Please keep usage reasonable. For bulk work, see the paid plan at https://nameda
 ## Links
 
 - Website and free tools: https://namedaemon.com
-- Issues: https://github.com/krasenslavov/namedaemon-py/issues
+- Issues: https://github.com/krasenslavov/namedaemon-pypi/issues
 - JavaScript version: `npm install namedaemon`
 
 MIT license.

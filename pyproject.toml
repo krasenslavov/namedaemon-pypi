@@ -28,9 +28,9 @@ namedaemon = "namedaemon.cli:main"
 
 [project.urls]
 Homepage = "https://namedaemon.com"
-Repository = "https://github.com/krasenslavov/namedaemon-py"
-Issues = "https://github.com/krasenslavov/namedaemon-py/issues"
-Changelog = "https://github.com/krasenslavov/namedaemon-py/blob/main/CHANGELOG.md"
+Repository = "https://github.com/krasenslavov/namedaemon-pypi"
+Issues = "https://github.com/krasenslavov/namedaemon-pypi/issues"
+Changelog = "https://github.com/krasenslavov/namedaemon-pypi/blob/main/CHANGELOG.md"
 
 [tool.hatch.version]
 path = "src/namedaemon/__init__.py"
