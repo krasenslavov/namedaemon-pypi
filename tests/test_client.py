@@ -39,6 +39,16 @@ class ClientTests(unittest.TestCase):
         self.assertTrue(req.get_header("User-agent").startswith("namedaemon-py/"))
 
     @mock.patch("urllib.request.urlopen")
+    def test_api_key_header(self, uo):
+        uo.return_value = FakeResp({"name": "example"})
+        NameDaemon(api_key="nd_live_abc").rate("example")
+        self.assertEqual(uo.call_args[0][0].get_header("X-nd-api-key"), "nd_live_abc")
+        uo.return_value = FakeResp({"name": "example"})
+        with mock.patch.dict("os.environ", {"NAMEDAEMON_API_KEY": ""}):
+            NameDaemon().rate("example")
+        self.assertIsNone(uo.call_args[0][0].get_header("X-nd-api-key"))
+
+    @mock.patch("urllib.request.urlopen")
     def test_lists_join_and_none_dropped(self, uo):
         uo.return_value = FakeResp({"results": []})
         NameDaemon().tld_check("nova", ["com", "io"])
