@@ -6,6 +6,7 @@ Standard library only (urllib), so it installs with no dependencies.
 from __future__ import annotations
 
 import json
+import os
 import time
 import urllib.error
 import urllib.parse
@@ -65,11 +66,14 @@ class NameDaemon:
         timeout: float = 20.0,
         retries: int = 0,
         user_agent: Optional[str] = None,
+        api_key: Optional[str] = None,
     ) -> None:
         self.base_url = base_url.rstrip("/")
         self.timeout = timeout
         self.retries = retries
         self.user_agent = user_agent or f"namedaemon-py/{__version__}"
+        # A Pro+ or Business API key (X-ND-API-Key); defaults to the NAMEDAEMON_API_KEY environment variable.
+        self.api_key = api_key or os.environ.get("NAMEDAEMON_API_KEY", "")
 
     # -- transport ---------------------------------------------------------
     def _request(self, method: str, path: str, params: Optional[Dict[str, Any]] = None, body: Any = None) -> Json:
@@ -78,6 +82,8 @@ class NameDaemon:
         if query:
             url += "?" + query
         headers = {"Accept": "application/json", "User-Agent": self.user_agent}
+        if self.api_key:
+            headers["X-ND-API-Key"] = self.api_key
         data = None
         if body is not None:
             data = json.dumps(body).encode("utf-8")

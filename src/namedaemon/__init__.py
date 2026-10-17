@@ -1,6 +1,6 @@
 """Client and CLI for NameDaemon (https://namedaemon.com)."""
 
-__version__ = "0.1.0"
+__version__ = "0.2.0"
 
 from .client import (  # noqa: E402
     DEFAULT_BASE_URL,
